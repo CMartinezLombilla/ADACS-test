@@ -39,14 +39,12 @@ for i in range(NSRC):
 
 
 # now write these to a csv file for use by my other program
-f = open('catalog.csv','w', encoding='utf-8')
-# ^- Consider using 'with' for resource-allocating operations (consider-using-with)
-
-print("id,ra,dec", file=f)
-for i in range(NSRC):
-    print("{0:07d}, {1:12f}, {2:12f}".format(i, ras[i], decs[i]), file=f)
-    # ^- Formatting a regular string which could be a f-string (consider-using-f-string)
-    
+with open('catalog.csv','w', encoding='utf-8') as f:  
+    print("id,ra,dec", file=f)
+    for i in range(NSRC):
+        print("{0:07d}, {1:12f}, {2:12f}".format(i, ras[i], decs[i]), file=f)
+        # ^- Formatting a regular string which could be a f-string (consider-using-f-string)
+        
     
     
     
