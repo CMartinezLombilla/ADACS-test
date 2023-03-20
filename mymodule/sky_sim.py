@@ -4,34 +4,30 @@
 Created on Mon Mar 20 10:49:18 2023
 
 @author: C. Martinez-Lombilla
+
+A script to simulate a catalogue of simulated stars around Andromeda galaxy 
 """
 
-""""
- Determine Andromeda location in ra/dec degrees 
-"""
-
+# Determine Andromeda location in ra/dec degrees 
 # from wikipedia
-ra = '00:42:44.3' 
-# ^- Constant name "ra" doesn't conform to UPPER_CASE naming style (invalid-name)
-dec = '41:16:09'  
-# ^- Constant name "dec" doesn't conform to UPPER_CASE naming style (invalid-name)
+RA = '00:42:44.3' 
+DEC = '41:16:09'  
 
 # convert to decimal degrees
-from math import *  
+from math import cos, pi  
 # ^- Redefining built-in 'pow' (redefined-builtin)
 # ^- Wildcard import math (wildcard-import)
 # ^- Import "from math import *" should be placed at the top of the module (wrong-import-position)
 # ^- W0614: Unused import(s) acos, acosh, asin, asinh, atan, atan2, atanh, ceil, comb, copysign, cosh, degrees, dist, e, erf, erfc, exp, expm1, fabs, factorial, floor, fmod, frexp, fsum, gamma, gcd, hypot, inf, isclose, isfinite, isinf, isnan, isqrt, ldexp, lgamma, log, log10, log1p, log2, modf, nan, perm, pow, prod, radians, remainder, sin, sinh, sqrt, tan, tanh, tau and trunc from wildcard import of math (unused-wildcard-import)
 
-d, m, s = dec.split(':')
-dec = int(d)+int(m)/60+float(s)/3600
+d, m, s = DEC.split(':')
+DEC = int(d)+int(m)/60+float(s)/3600
 
-h, m, s = ra.split(':')
-ra = 15*(int(h)+int(m)/60+float(s)/3600)
-ra = ra/cos(dec*pi/180)
+h, m, s = RA.split(':')
+RA = 15*(int(h)+int(m)/60+float(s)/3600)
+RA = RA/cos(DEC*pi/180)
 
-nsrc = 1_000_000
-# ^- Constant name "nsrc" doesn't conform to UPPER_CASE naming style (invalid-name)
+NSRC = 1_000_000
 
 # make 1000 stars within 1 degree of Andromeda
 from random import *
@@ -41,9 +37,9 @@ from random import *
 
 ras = []
 decs = []
-for i in range(nsrc):
-    ras.append(ra + uniform(-1,1))
-    decs.append(dec + uniform(-1,1))
+for i in range(NSRC):
+    ras.append(RA + uniform(-1,1))
+    decs.append(DEC + uniform(-1,1))
 
 
 # now write these to a csv file for use by my other program
@@ -52,6 +48,12 @@ f = open('catalog.csv','w')
 # ^- Consider using 'with' for resource-allocating operations (consider-using-with)
 
 print("id,ra,dec", file=f)
-for i in range(nsrc):
-    print("{0:07d}, {1:12f}, {2:12f}".forgit logmat(i, ras[i], decs[i]), file=f)
+for i in range(NSRC):
+    print("{0:07d}, {1:12f}, {2:12f}".format(i, ras[i], decs[i]), file=f)
     # ^- Formatting a regular string which could be a f-string (consider-using-f-string)
+    
+    
+    
+    
+    
+    
