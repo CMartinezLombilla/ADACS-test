@@ -15,10 +15,6 @@ DEC = '41:16:09'
 
 # convert to decimal degrees
 from math import cos, pi  
-# ^- Redefining built-in 'pow' (redefined-builtin)
-# ^- Wildcard import math (wildcard-import)
-# ^- Import "from math import *" should be placed at the top of the module (wrong-import-position)
-# ^- W0614: Unused import(s) acos, acosh, asin, asinh, atan, atan2, atanh, ceil, comb, copysign, cosh, degrees, dist, e, erf, erfc, exp, expm1, fabs, factorial, floor, fmod, frexp, fsum, gamma, gcd, hypot, inf, isclose, isfinite, isinf, isnan, isqrt, ldexp, lgamma, log, log10, log1p, log2, modf, nan, perm, pow, prod, radians, remainder, sin, sinh, sqrt, tan, tanh, tau and trunc from wildcard import of math (unused-wildcard-import)
 
 d, m, s = DEC.split(':')
 DEC = int(d)+int(m)/60+float(s)/3600
