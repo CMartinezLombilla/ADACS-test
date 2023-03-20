@@ -6,8 +6,9 @@ Created on Mon Mar 20 10:49:18 2023
 @author: C. Martinez-Lombilla
 """
 
-# Determine Andromeda location in ra/dec degrees 
-# ^- Missing module docstring (missing-module-docstring)
+""""
+ Determine Andromeda location in ra/dec degrees 
+"""
 
 # from wikipedia
 ra = '00:42:44.3' 
