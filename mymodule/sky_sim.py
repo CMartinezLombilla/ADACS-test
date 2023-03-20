@@ -39,8 +39,7 @@ for i in range(NSRC):
 
 
 # now write these to a csv file for use by my other program
-f = open('catalog.csv','w')
-# ^- Using open without explicitly specifying an encoding (unspecified-encoding)
+f = open('catalog.csv','w', encoding='utf-8')
 # ^- Consider using 'with' for resource-allocating operations (consider-using-with)
 
 print("id,ra,dec", file=f)
