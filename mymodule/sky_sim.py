@@ -15,9 +15,14 @@ NSRC = 1_000_000
 
 
 def get_radec():
-    """"
+    '''
     Determine Andromeda location in ra/dec degrees
-    """
+
+    Returns
+    -------
+    Tuple with ra and dec values
+
+    '''
     
     # from wikipedia
     RA = '00:42:44.3'
@@ -35,15 +40,31 @@ def get_radec():
 
 
 def make_stars(ra, dec, NSRC):
-    """"
-    make 1000000 stars within 1 degree of Andromeda
-    '"""
+    '''
+    Make 1000000 stars within 1 degree of Andromeda
+
+    Parameters
+    ----------
+    ra : float
+        ra in degrees
+    dec : float
+        dec in degrees
+    NSRC : int
+        number of stars to simulate
+
+    Returns
+    -------
+    tuple with the lists of ra and dec values
+
+    '''
+
     ras = []
     decs = []
     for i in range(NSRC):
         ras.append(ra + random.uniform(-1,1))
         decs.append(dec + random.uniform(-1,1))
     return (ras, decs)
+
 
 
 def main():
