@@ -33,11 +33,8 @@ def test_module_import():
 
 def test_get_radec():
     from mymodule import sky_sim
-    
-    answer = (14.215420962967535, 41.26916666666667)
+    answer = (14.215420962967535, 41.26916666666666)
     result = sky_sim.get_radec()
-    testing.assert_allclose(answer, result, rtol=0.1)
     
-    if answer!= result:
-        raise AssertionError(f'Position of Andromeda is wrong.\nShould be {answer}, but go {result}')
+    testing.assert_allclose(answer, result, rtol=1e-8)
     return
