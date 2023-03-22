@@ -11,6 +11,7 @@ A script to simulate a catalogue of simulated stars around Andromeda galaxy
 import math
 import random
 import argparse
+import numpy as np
 
 NSRC = 1_000_000
 
@@ -59,7 +60,7 @@ def get_radec():
     return (ra, dec)
 
 
-def make_stars(ra, dec, NSRC):
+def make_stars(ra, dec, num_stars):
     '''
     Make 1000000 stars within 1 degree of Andromeda
 
@@ -69,7 +70,7 @@ def make_stars(ra, dec, NSRC):
         ra in degrees
     dec : float
         dec in degrees
-    NSRC : int
+    num_stars : int
         number of stars to simulate
 
     Returns
@@ -78,11 +79,11 @@ def make_stars(ra, dec, NSRC):
 
     '''
 
-    ras = []
-    decs = []
+    ras = np.random.uniform(size=num_stars, low=ra-1, high=ra+1)
+    decs = np.random.uniform(size=num_stars, low=dec-1, high=dec+1)
     for i in range(NSRC):
-        ras.append(ra + random.uniform(-1,1))
-        decs.append(dec + random.uniform(-1,1))
+        ras[i]=ra + random.uniform(-1,1)
+        decs[i]=dec + random.uniform(-1,1)
     return (ras, decs)
 
 
@@ -98,16 +99,14 @@ def main():
         ra = options.ra
         dec = options.dec
     
-    ra, dec = get_radec()
-    ras, decs = make_stars(ra, dec, NSRC)
-    
-    # now write these to a csv file for use by my other program
-    with open(options.out,'w', encoding='utf-8') as f:
-        print("id,ra,dec", file=f)
-        for i in range(NSRC):
-            print(f"{i:07d}, {ras[i]:12f}, {decs[i]:12f}", file=f)
-    print(f"Wrote {options.out}")
+    ras, decs = make_stars(ra,dec, NSRC)
 
+    # Turn our list of floats into NumPy arrays
+    ras = np.array(ras)
+    decs = np.array(decs)
+    # We stack the arrays together, and use savetxt with a comma delimiter
+    np.savetxt(options.out, np.stack((ras, decs), axis = -1), delimiter=",")
+    print(f"Wrote {options.out}")
 
 if __name__ ==  '__main__':
     main()
